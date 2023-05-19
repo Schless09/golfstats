@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import "./leaderboardTable.module.css"; // Import the CSS file
+
 
 function LeaderboardTable({
   leaderboardRows,
@@ -13,10 +15,9 @@ function LeaderboardTable({
       <thead>
         <tr>
           <th>Position</th>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Golfer</th>
           <th>Total</th>
-          <th>Current Round</th>
+          <th>Today</th>
           <th>Thru</th>
           <th>Winnings</th>
           <th>Odds to Win</th>
@@ -26,8 +27,9 @@ function LeaderboardTable({
         {leaderboardRows.map((item, index) => (
           <tr key={index}>
             <td>{item.position}</td>
-            <td>{item.firstName}</td>
-            <td>{item.lastName}</td>
+            <td>
+              {item.firstName} {item.lastName}
+            </td>
             <td>{item.total}</td>
             <td>{item.currentRoundScore}</td>
             <td>
@@ -46,7 +48,7 @@ function LeaderboardTable({
                   item.position,
                   payouts,
                   leaderboardRows
-                ).toFixed(2)
+                ).toFixed(0)
               ).toLocaleString("en-US")}
             </td>
             <td>{odds}</td>
