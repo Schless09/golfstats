@@ -52,7 +52,7 @@ const handleSort = (column) => {
           <th onClick={() => handleSort("currentRoundScore")}>Today</th>
           <th onClick={() => handleSort("thru")}>Thru</th>
           <th onClick={() => handleSort("winnings")}>Winnings</th>
-          <th onClick={() => handleSort("odds")}>Odds to Win</th>
+          {/* <th onClick={() => handleSort("odds")}>Odds to Win</th> */}
         </tr>
       </thead>
       <tbody>
@@ -83,7 +83,7 @@ const handleSort = (column) => {
                 ).toFixed(0)
               ).toLocaleString("en-US")}
             </td>
-            <td>{odds}</td>
+            {/* <td>{odds}</td> */}
           </tr>
         ))}
       </tbody>
