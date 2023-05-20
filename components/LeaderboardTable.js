@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./leaderboardTable.module.css"; // Import the CSS file
-
+import "./leaderboardTable.module.css";
 
 function LeaderboardTable({
   leaderboardRows,
@@ -10,21 +10,53 @@ function LeaderboardTable({
   calculateWinnings,
   odds,
 }) {
+  const [sortedRows, setSortedRows] = useState([]);
+  const [sortOrder, setSortOrder] = useState("");
+
+  useEffect(() => {
+    setSortedRows(leaderboardRows); // Initialize sortedRows with the original data
+  }, [leaderboardRows]);
+
+
+const handleSort = (column) => {
+   let sortedData = [...sortedRows];
+
+   if (sortOrder === "asc") {
+     sortedData.sort((a, b) => {
+       if (a.position === "cut" || b.position === "cut") {
+         return a.position === "cut" ? 1 : -1;
+       }
+       return a[column] > b[column] ? 1 : -1;
+     });
+     setSortOrder("desc");
+   } else {
+     sortedData.sort((a, b) => {
+       if (a.position === "cut" || b.position === "cut") {
+         return a.position === "cut" ? -1 : 1;
+       }
+       return a[column] > b[column] ? -1 : 1;
+     });
+     setSortOrder("asc");
+   }
+
+   setSortedRows(sortedData);
+ };
+
   return (
     <table className="table table-striped">
       <thead>
         <tr>
-          <th>Position</th>
-          <th>Golfer</th>
-          <th>Total</th>
-          <th>Today</th>
-          <th>Thru</th>
-          <th>Winnings</th>
-          <th>Odds to Win</th>
+          <th onClick={() => handleSort("position")}>Pos</th>
+          <th onClick={() => handleSort("lastName")}>Golfer</th>
+          <th onClick={() => handleSort("total")}>Total</th>
+          <th onClick={() => handleSort("currentRoundScore")}>Today</th>
+          <th onClick={() => handleSort("thru")}>Thru</th>
+          <th onClick={() => handleSort("winnings")}>Winnings</th>
+          <th onClick={() => handleSort("odds")}>Odds to Win</th>
         </tr>
       </thead>
       <tbody>
-        {leaderboardRows.map((item, index) => (
+        {sortedRows.map((item, index) => (
           <tr key={index}>
             <td>{item.position}</td>
             <td>
@@ -37,10 +69,10 @@ function LeaderboardTable({
                 item.currentHole,
                 startingHole,
                 item.currentRound,
-                item.roundComplete
+                item.roundComplete,
+                item.teeTime
               )}
             </td>
-
             <td>
               ${" "}
               {Number(
