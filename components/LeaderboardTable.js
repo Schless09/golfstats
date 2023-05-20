@@ -28,7 +28,7 @@ function LeaderboardTable({
           <tr key={index}>
             <td>{item.position}</td>
             <td>
-              {item.firstName} {item.lastName}
+              {item.firstName[0]} {item.lastName}
             </td>
             <td>{item.total}</td>
             <td>{item.currentRoundScore}</td>

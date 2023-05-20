@@ -94,6 +94,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Tubesteaks @ the Turn</title>
       </Head>
       <h1 className="text-center">Tubesteaks @ the Turn</h1>
