@@ -22,12 +22,15 @@ function LeaderboardTable({
 
     if (sortOrder === "asc") {
       sortedData.sort((a, b) => {
+        if (a.position === "WD" || b.position === "WD") {
+          return a.position === "WD" ? 1 : -1;
+        }
         if (a.position === "cut" || b.position === "cut") {
           return a.position === "cut" ? 1 : -1;
         }
-        if (column === "total") {
-          const aValue = a[column] === "E" ? 0 : a[column];
-          const bValue = b[column] === "E" ? 0 : b[column];
+        if (column === "total" || column === "currentRoundScore") {
+          const aValue = a[column] === "E" ? 0 : parseInt(a[column]);
+          const bValue = b[column] === "E" ? 0 : parseInt(b[column]);
           return aValue > bValue ? 1 : -1;
         }
         return a[column] > b[column] ? 1 : -1;
@@ -35,12 +38,15 @@ function LeaderboardTable({
       setSortOrder("desc");
     } else {
       sortedData.sort((a, b) => {
+        if (a.position === "WD" || b.position === "WD") {
+          return a.position === "WD" ? 1 : -1;
+        }
         if (a.position === "cut" || b.position === "cut") {
           return a.position === "cut" ? -1 : 1;
         }
-        if (column === "total") {
-          const aValue = a[column] === "E" ? 0 : a[column];
-          const bValue = b[column] === "E" ? 0 : b[column];
+        if (column === "total" || column === "currentRoundScore") {
+          const aValue = a[column] === "E" ? 0 : parseInt(a[column]);
+          const bValue = b[column] === "E" ? 0 : parseInt(b[column]);
           return aValue > bValue ? -1 : 1;
         }
         return a[column] > b[column] ? -1 : 1;
@@ -59,6 +65,7 @@ function LeaderboardTable({
           <th onClick={() => handleSort("lastName")}>Golfer</th>
           <th onClick={() => handleSort("total")}>Total</th>
           <th onClick={() => handleSort("currentRoundScore")}>Today</th>
+
           <th onClick={() => handleSort("thru")}>Thru</th>
           <th onClick={() => handleSort("winnings")}>Winnings</th>
           {/* <th onClick={() => handleSort("odds")}>Odds to Win</th> */}
