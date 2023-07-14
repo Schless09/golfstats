@@ -17,30 +17,39 @@ function LeaderboardTable({
     setSortedRows(leaderboardRows); // Initialize sortedRows with the original data
   }, [leaderboardRows]);
 
+  const handleSort = (column) => {
+    let sortedData = [...sortedRows];
 
-const handleSort = (column) => {
-   let sortedData = [...sortedRows];
+    if (sortOrder === "asc") {
+      sortedData.sort((a, b) => {
+        if (a.position === "cut" || b.position === "cut") {
+          return a.position === "cut" ? 1 : -1;
+        }
+        if (column === "total") {
+          const aValue = a[column] === "E" ? 0 : a[column];
+          const bValue = b[column] === "E" ? 0 : b[column];
+          return aValue > bValue ? 1 : -1;
+        }
+        return a[column] > b[column] ? 1 : -1;
+      });
+      setSortOrder("desc");
+    } else {
+      sortedData.sort((a, b) => {
+        if (a.position === "cut" || b.position === "cut") {
+          return a.position === "cut" ? -1 : 1;
+        }
+        if (column === "total") {
+          const aValue = a[column] === "E" ? 0 : a[column];
+          const bValue = b[column] === "E" ? 0 : b[column];
+          return aValue > bValue ? -1 : 1;
+        }
+        return a[column] > b[column] ? -1 : 1;
+      });
+      setSortOrder("asc");
+    }
 
-   if (sortOrder === "asc") {
-     sortedData.sort((a, b) => {
-       if (a.position === "cut" || b.position === "cut") {
-         return a.position === "cut" ? 1 : -1;
-       }
-       return a[column] > b[column] ? 1 : -1;
-     });
-     setSortOrder("desc");
-   } else {
-     sortedData.sort((a, b) => {
-       if (a.position === "cut" || b.position === "cut") {
-         return a.position === "cut" ? -1 : 1;
-       }
-       return a[column] > b[column] ? -1 : 1;
-     });
-     setSortOrder("asc");
-   }
-
-   setSortedRows(sortedData);
- };
+    setSortedRows(sortedData);
+  };
 
   return (
     <table className="table table-striped">
@@ -74,7 +83,7 @@ const handleSort = (column) => {
               )}
             </td>
             <td>
-              ${" "}
+              ${""}
               {Number(
                 calculateWinnings(
                   item.position,

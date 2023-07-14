@@ -9,7 +9,7 @@ import LeaderboardTable from "../components/LeaderboardTable";
 export default function Home() {
   const [data, setData] = useState(null);
   const [odds, setOdds] = useState(null);
-  const startingHole = 10;
+  const startingHole = "";
   const [roundId, setRoundId] = useState("");
   const [roundStatus, setRoundStatus] = useState("");
   const [lastUpdated, setLastUpdated] = useState("");
@@ -17,7 +17,7 @@ export default function Home() {
   const options = {
     method: "GET",
     url: "https://live-golf-data.p.rapidapi.com/leaderboard",
-    params: { orgId: "1", tournId: "033", year: "2023" },
+    params: { orgId: "1", tournId: "541", year: "2023" },
     headers: {
       "x-rapidapi-key": "29aabbcfb8mshd6fa28f41aafd67p1ed875jsn2aaaaa0c2423",
       "x-rapidapi-host": "live-golf-data.p.rapidapi.com",
@@ -39,31 +39,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    async function scrapeOdds() {
-      try {
-        const oddsResponse = await axios.get(
-          "https://il.sportsbook.fanduel.com/"
-        );
-        const oddsHtml = oddsResponse.data;
-        const oddsRegex = /<span class="iu iv ba ed jc jd ez">(\+?\d+)<\/span>/;
-        const oddsMatch = oddsHtml.match(oddsRegex);
-        if (oddsMatch) {
-          setOdds(oddsMatch[1]);
-        }
-      } catch (error) {
-        console.error("Error scraping odds:", error);
-      }
-    }
-    scrapeOdds();
-  }, []);
-
-  useEffect(() => {
     async function fetchRoundData() {
       try {
         const response = await axios.get(
           "https://live-golf-data.p.rapidapi.com/leaderboard",
           {
-            params: { orgId: "1", tournId: "033", year: "2023" },
+            params: { orgId: "1", tournId: "541", year: "2023" },
             headers: {
               "x-rapidapi-key":
                 "29aabbcfb8mshd6fa28f41aafd67p1ed875jsn2aaaaa0c2423",
@@ -97,9 +78,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Tubesteaks @ the Turn</title>
       </Head>
-      <h1 className="text-center">Tubesteaks @ the Turn</h1>
-      <h2 className="text-center">PGA Championship</h2>
-      <h4 className="text-center">Thu May 18 - Sun May 21, 2023</h4>
+      <h1 className="text-center">Live Leaderboard</h1>
+      <h2 className="text-center">Scottish Open</h2>
+      <h4 className="text-center">Thu July 13 - Sun July 16, 2023</h4>
       <h5 className="text-center">
         Round {roundId} {roundStatus} - Last Updated: {lastUpdated} CST
       </h5>
