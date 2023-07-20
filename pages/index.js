@@ -17,7 +17,7 @@ export default function Home() {
   const options = {
     method: "GET",
     url: "https://live-golf-data.p.rapidapi.com/leaderboard",
-    params: { orgId: "1", tournId: "541", year: "2023" },
+    params: { orgId: "1", tournId: "100", year: "2023" },
     headers: {
       "x-rapidapi-key": "29aabbcfb8mshd6fa28f41aafd67p1ed875jsn2aaaaa0c2423",
       "x-rapidapi-host": "live-golf-data.p.rapidapi.com",
@@ -44,7 +44,7 @@ export default function Home() {
         const response = await axios.get(
           "https://live-golf-data.p.rapidapi.com/leaderboard",
           {
-            params: { orgId: "1", tournId: "541", year: "2023" },
+            params: { orgId: "1", tournId: "100", year: "2023" },
             headers: {
               "x-rapidapi-key":
                 "29aabbcfb8mshd6fa28f41aafd67p1ed875jsn2aaaaa0c2423",
