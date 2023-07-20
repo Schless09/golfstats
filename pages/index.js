@@ -79,8 +79,8 @@ export default function Home() {
         <title>Tubesteaks @ the Turn</title>
       </Head>
       <h1 className="text-center">Live Leaderboard</h1>
-      <h2 className="text-center">Scottish Open</h2>
-      <h4 className="text-center">Thu July 13 - Sun July 16, 2023</h4>
+      <h2 className="text-center">British Open</h2>
+      <h4 className="text-center">Thu July 20- Sun July 23, 2023</h4>
       <h5 className="text-center">
         Round {roundId} {roundStatus} - Last Updated: {lastUpdated} CST
       </h5>
