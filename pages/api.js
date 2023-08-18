@@ -6,7 +6,7 @@ export async function getGolfData() {
     url: "https://live-golf-data.p.rapidapi.com/leaderboard",
     params: {
       orgId: "1",
-      tournId: "100",
+      tournId: "028",
       year: "2023",
     },
     headers: {
